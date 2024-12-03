@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Baseball club Forms </title>
+        <link rel="stylesheet" href="css/styles2.css" type="text/css" />
+        <script type = "text/javascript">
+
+function updateProgress() {
+    var pb = document.getElementById("pb");
+    var cnt = 0;
+
+    if (document.getElementById("name").value != "Example: Junsu Yoon" && document.getElementById("name").value != "")
+        cnt++;
+
+    if (document.getElementById("email").value != "example@domain.com" && document.getElementById("email").value != "")
+        cnt++;
+
+    if (document.getElementById("phone").value != "phone" && document.getElementById("phone").value != "")
+        cnt++;
+
+    if (document.getElementById("date").value != "")
+        cnt++;
+
+    if (document.getElementById("hometown").value != "")
+        cnt++;
+
+    if (document.getElementById("years").value != "")
+        cnt++;
+
+    if (document.getElementById("height").value != "")
+        cnt++;
+
+    if (document.getElementById("weight").value != "")
+        cnt++;
+
+    var flag = false;
+
+    if (document.getElementById("pitcher").checked)
+        flag = true;
+
+    if (document.getElementById("catcher").checked)
+        flag = true;
+
+    if (document.getElementById("firstBase").checked)
+        flag = true;
+
+    if (document.getElementById("secondBase").checked)
+        flag = true;
+
+    if (document.getElementById("shortStop").checked)
+        flag = true;
+
+    if (document.getElementById("thirdBase").checked)
+        flag = true;
+
+    if (document.getElementById("outField").checked)
+        flag = true;
+
+    if (document.getElementById("utility").checked)
+        flag = true;
+
+    if (flag == true)
+        cnt++;
+
+    pb.value = cnt;
+}
+</script>
+    </head>
+
+    <body>
+        <h1>Baseball Club Signup</h1>
+        <div style="margin-left:190px;">
+            <span id="progress">Progress:</span>
+            <progress value = "0" max ="11" id="pb"></progress>
+            <br/>&nbsp;
+        </div>
+
+        <form name="payment" id="payment" action="progressForm.php" method="post">
+            <fieldset>
+                <legend>Personal Information</legend>
+                <ol>
+                    <li>
+                        <label for="name">Name</label>
+                        <input id = "name" name="name" type="text" placeholder="Example: Junsu Yoon" required = "required" autofocus = "autofocus" onChange="updateProgress();" />
+
+                    </li>
+
+                    <li>
+                        <label for = "email">Email</label>
+                        <input id = "email" name="email" type="email" placeholder="example@domain.com" required = "required" onChange="updateProgress();" />
+                    </li>
+
+                    <li>
+                        <label for = "phone">Phone</label>
+                        <input id = "phone" name="phone" type="tel" placeholder="Example: 262-303-6749" required = "required" onChange="updateProgress();" />
+                    </li>
+
+                    <li>
+                        <label for = "date">Date of Birth</label>
+                        <input id = "date" name="date" type="date" required = "required" onChange="updateProgress();" />
+                    </li>
+                </ol>
+            </fieldset>
+
+            <fieldset>
+                <ol>
+                    <li>
+                        <label for = "hometown">Home Town</label>
+                        <textarea id = "hometown" name="hometown" placeholder="Where are you from?" required = "required" onChange="updateProgress();"> </textarea>
+                    </li>
+
+                </ol>
+
+
+            </fieldset>
+
+            <fieldset>
+                <legend> Baseball</legend>
+                <ol>
+                    <li>
+                        <fieldset>
+                        <legend>Position</legend>
+                        <ol>
+                    
+                    <li>
+                        <input id="pitcher" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="pitcher">Pitcher</label>
+                    </li>
+                    <li>
+                        <input id="catcher" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="catcher">Catcher</label>
+                    </li>
+                    
+                    <li>
+                        <input id="firstBase" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="firstBase">1st Base</label>
+                    </li>
+                    <li>
+                        <input id="secondBase" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="secondBase">2nd Base</label>
+                    </li>
+                    <li>
+                        <input id="shortStop" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="shortStop">Short Stop</label>
+                    </li>
+                    <li>
+                        <input id="thirdBase" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="thirdBase">3rd Base</label>
+                    </li>
+                    <li>
+                        <input id="outField" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="outField">Out Fielder</label>
+                    </li>
+                    <li>
+                        <input id="utility" name="position" type="radio" onChange="updateProgress();" />
+                        <label for="utility">Utility Player</label>
+                    </li>
+                    
+                </ol>
+            </fieldset>
+            </li>
+
+                <li>
+                    <label for = "years">Experience</label>
+                    <input id = "years" name="years" type="number" placeholder="How many years have you played baseball?" required = "required" onChange="updateProgress();" />
+                </li>
+                <li>
+                    <label for = "height">Height</label>
+                    <input id = "height" name="height" type="text" required = "required" onChange="updateProgress();" />
+                </li>
+                <li>
+                    <label for = "weight">Weight</label>
+                    <input id = "weight" name="weight" type="number" required = "required" onChange="updateProgress();" />
+                </li>
+
+            </ol>
+            </fieldset>
+            <fieldset>
+                <button type="submit">Proceed</button>
+                <h4><a href="index.html">Return to the index page</a></h4>
+            </fieldset>
+    </form>
+</body>
+</html>
+
+
+
+

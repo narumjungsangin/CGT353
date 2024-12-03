@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Project 1</title>
+<script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+<style type="text/css">
+    body {background-color: #cca;}
+    #contactForm {
+        width: 400px;
+        height: 250px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 9pt;
+        font-weight: bold;
+        position: fixed;
+        top: 250px;
+        left: -400px;
+        background-color: rgba(50, 50, 50, .99);
+        margin: 0px;
+        z-index: 110;
+    }
+    #contact span {
+        padding: 0px;
+        margin: 0px;
+        position: relative;
+        top: 2px;
+    }
+    #contact {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 9pt;
+        font-weight: bold;
+        text-align: center;
+        padding: 17px 3px 0 3px;
+        position: absolute;
+        top: 350px;
+        left: -42px;
+        background-color: rgba(177, 148, 108, .75);
+        width: 90px;
+        height: 25px;
+        margin: 0px;
+        z-index: 100;
+    }
+    #contact:hover,
+    #contact:focus {
+        background-color: rgba(177, 148, 108, .90);
+        cursor: pointer;
+    }
+    #contact.fixed,
+    #contactForm.fixed {
+        position: fixed;
+    }
+    .rotate {
+        transform: rotate(-90deg);
+    }
+    #dropdown {
+        position: absolute;
+        top: -150px;
+        left: 500px;
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #000000;
+        z-index: 75;
+    }
+    #dropdown.fixed {
+        position: fixed;
+    }
+    #content1, #content2, #content3, #content4, #content5 {
+        position: absolute;
+        border-radius: 15px;
+        background-color: #a3a3a3;
+        width: 600px;
+        height: 300px;
+        overflow: hidden;
+        z-index: 1;
+    }
+    #content1 { top: 100px; left: 25px; }
+    #content2 { top: 100px; left: 660px; }
+    #content3 { top: 425px; left: 25px; }
+    #content4 { top: 425px; left: 660px; }
+    #content5 { top: 750px; left: 25px; height: 700px; }
+    div { width: 150px; height: 200px; border: 1px solid #aaa; text-align: center; background-color: #000000; }
+    div#wrapper { position: absolute; top: 100px; left: 50px; width: 600px; height: 490px; }
+    div#th1 { position: absolute; top: 30px; left: 30px; background: url("images/lotte/1.jpg") no-repeat center; }
+    div#th2 { position: absolute; top: 30px; left: 210px; background: url("images/lotte/2.jpg") no-repeat center; }
+    div#th3 { position: absolute; top: 30px; left: 390px; background: url("images/lotte/3.jpg") no-repeat center; }
+    div#th4 { position: absolute; top: 260px; left: 30px; background: url("images/lotte/4.jpg") no-repeat center; }
+    div#th5 { position: absolute; top: 260px; left: 210px; background: url("images/lotte/5.jpg") no-repeat center; }
+    div#th6 { position: absolute; top: 260px; left: 390px; background: url("images/lotte/6.jpg") no-repeat center; }
+    div#links { position: absolute; top: 530px; left: 20px; width: 750px; height: 30px; }
+</style>
+</head>
+<body>
+    
+    <div id="contact"><span>Contact Me</span></div>
+    <div id="contactForm">
+        <div id="contactClose" style="position:relative; text-align: center; width: 15px; left:375px; top:5px; border:1px solid #dddddd; padding: 1px; color: #dddddd; cursor: pointer;">X</div>
+        <div id="contactAddress" style="position: relative; width: 325px; left:45px; top:-150px; background-color: rgba(255,255,255,0); border-color: rgba(255,255,255,0); padding: 1px; color: #dddddd;">
+            Junsu Yoon<br/>&nbsp;<br/>
+            yoon188@purdue.edu<br/>&nbsp;<br/>
+            Purdue University<br/>
+            West Lafayette, IN 47906
+        </div>
+    </div>
+
+    <h3>Lotte Giants</h3>
+    <p>
+        <!-- <a href="fixed.html">Fixed Part 1</a>
+        <a href="fixed2.html">Fixed Part 2</a>
+        <a href="movingAd.html">Moving Ad</a>
+        <a href="movingBall.html">Moving Ball</a>
+        <a href="bouncingBall.html">Bouncing Ball</a> -->
+    </p>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#contact").addClass("rotate");
+
+            $(window).scroll(function(){
+                $("#contact").addClass("fixed");
+            });
+
+            $("#dropdown").animate({ top:"+=400" }, 2000).addClass("fixed");
+
+            $("#closeAd").click(function(event){
+                event.preventDefault();
+                $("#dropdown").css("top", "-150px");
+            });
+
+            var isShowing = 1;
+            $("#contact").click(function(e){
+                e.preventDefault();
+                if (isShowing % 2) {
+                    $("#contact").animate({ left: "+=400" }, 700);
+                    $("#contactForm").animate({ left: "+=400" }, 700);
+                    $("#contact").css("background-color","rgba(177,148,108,.95)").addClass("fixed");
+                } else {
+                    $("#contact").animate({ left: "-=400" }, 700);
+                    $("#contactForm").animate({ left: "-=400" }, 700);
+                    $("#contact").css("background-color","rgba(177,148,108,.75)");
+                }
+                isShowing++;
+            });
+
+            $("#contactClose").click(function(e){
+                e.preventDefault();
+                $("#contact").animate({ left: "-=400" }, 700);
+                $("#contactForm").animate({ left: "-=400" }, 700);
+                $("#contact").css("background-color","rgba(177,148,108,.75)");
+                isShowing++;
+            });
+
+
+            $("#th1, #th2, #th3, #th5, #th6, #th7").animate({"opacity": .6}).hover(
+                function(){ $(this).animate({opacity: 1}); },
+                function(){ $(this).animate({"opacity": .6}); }
+            );
+        });
+    </script>
+
+    <div id="wrapper">
+        <div id="th1"></div>
+        <div id="th2"></div>
+        <div id="th3"></div>
+        <div id="th4"></div>
+        <div id="th5"></div>
+        <div id="th6"></div>
+    </div>
+
+    <p>
+        <a href="index.html">return to Main</a>
+    </p>
+</body>
+</html>

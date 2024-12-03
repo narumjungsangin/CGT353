@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Moving Ad</title>
+<script type ="text/javascript" src ="js/jquery-3.7.1.min.js"> </script>
+<style type="text/css">
+    #dropdown{
+        position:absolute;
+        top:0px;
+        left: 300px;
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #000000;
+    }
+</style>
+</head>
+<body>
+    <h3>Assign 04 Moving Ad</h3>
+    <!-- <p>
+        <a href="fixed.html">Fixed Part 1</a> |
+        <a href="fixed2.html">Fixed Part 2</a> |
+        <a href="movingAd.html">Moving Ad</a> |
+        <a href="movingBall.html">Moving Ball</a> |
+        <a href="bouncingBall.html">Bouncing Ball</a> |
+    </p> -->
+
+    <div id="dropdown">
+        Place Ad contenct here <br/><br/>
+        Will you take a quick survey? <br/><br/>
+        <a href="#" id="closeAd">Close</a>
+    </div>
+
+    <script type = "text/javascript">
+        $(document).ready(function(){
+            var counter = 0;
+            while( counter < 100) {
+                //move down and left
+                $("#dropdown").animate({
+                    top:"+=300",
+                    left:"-=300"
+                }, 700);
+
+                //move up and right
+                $("#dropdown").animate({
+                    top:"+=300",
+                    left:"+=300"
+                }, 700);
+                counter ++; 
+
+                
+                //move up and right
+                $("#dropdown").animate({
+                    top:"-=300",
+                    left:"+=300"
+                }, 700);
+
+
+                $("#dropdown").animate({
+                    top:"-=300",
+                    left:"-=300"
+                }, 700);
+                counter ++; 
+            }// end while loop
+
+
+            $("a").hover(function(e){
+                $("a").css("float", "right");
+            }); //end hover
+
+            $("a").click(function(e){
+                e.preventDefault();
+                $("#dropdown").hide();
+            });
+        }); // end document ready
+    </script>
+
+</body>
+</html>

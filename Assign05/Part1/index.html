@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sliding Images</title>
+    <link href="css/styles.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div id="page">
+        <div id="main_content">
+            <section id="home">
+                <div id="container" class="container">
+                    <div class="image_wrapper">
+                        <img id="pic1" src="images/1.jpg" alt="">
+                        <img id="pic2" src="images/2.jpg" alt="">
+                        <img id="pic3" src="images/3.jpg" alt="">
+                        <img id="pic4" src="images/4.jpg" alt="">
+                        <img id="pic5" src="images/5.jpg" alt="">
+                        <img id="pic6" src="images/6.jpg" alt="">
+                        <img id="pic7" src="images/7.jpg" alt="">
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="next"></div>
+                    <div class="prev"></div>
+
+                    <!-- Thumbnail navigation -->
+                    <ul class="nav">
+                        <li id="nav1" class="selected"><a class="thumbnav" href="images/1.jpg" rel="images/thumbs/1.jpg">Image 1</a></li>
+                        <li id="nav2"><a class="thumbnav" href="images/2.jpg" rel="images/thumbs/2.jpg">Image 2</a></li>
+                        <li id="nav3"><a class="thumbnav" href="images/3.jpg" rel="images/thumbs/3.jpg">Image 3</a></li>
+                        <li id="nav4"><a class="thumbnav" href="images/4.jpg" rel="images/thumbs/4.jpg">Image 4</a></li>
+                        <li id="nav5"><a class="thumbnav" href="images/5.jpg" rel="images/thumbs/5.jpg">Image 5</a></li>
+                        <li id="nav6"><a class="thumbnav" href="images/6.jpg" rel="images/thumbs/6.jpg">Image 6</a></li>
+                        <li id="nav7"><a class="thumbnav" href="images/7.jpg" rel="images/thumbs/7.jpg">Image 7</a></li>
+                        <li class="preview">
+                            <div class="preview_wrapper"></div>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+                <a href="../Part2/index.html">To Part 2</a>
+
+                <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+                <script type="text/javascript">
+                   $(document).ready(function() {
+                        var counter = 1;
+                        var move = 650; // Assuming each image width is 650px
+
+                        // Thumbnail hover preview
+                        $("a.thumbnav").hover(function() {
+                            var rel = $(this).attr("rel"); // Get the thumbnail URL
+                            var dotPosition = $(this).parent().position().left; // Get the position of the hovered dot
+
+                            // Set the background of the preview and position it
+                            $("li.preview .preview_wrapper").css({
+                                "background": "url(" + rel + ") no-repeat center",
+                                "background-size": "contain"
+                            });
+
+                            // Adjust the left position dynamically
+                            $("li.preview").css({
+                                "display": "block",
+                                "left": dotPosition - 30 + "px" // Adjust based on the position of the dot
+                            });
+                        }, function() {
+                            // Hide the preview when not hovering
+                            $("li.preview").css("display", "none");
+                        });
+
+                        // Thumbnail navigation click
+                        $("a.thumbnav").click(function(event) {
+                            event.preventDefault();
+                            var ref = $(this).attr("href");
+
+                            var imgNum = parseInt(ref.match(/\d/)[0]);
+                            var distance = (imgNum - counter) * move;
+                            var direction = distance < 0 ? "+=" : "-=";
+
+                            $(".image_wrapper img").animate({
+                                left: direction + Math.abs(distance)
+                            }, 250);
+
+                            counter = imgNum;
+                            $("li.selected").removeClass("selected");
+                            $("#nav" + imgNum).addClass("selected");
+                        });
+
+                        // Next button
+                        $(".next").click(function() {
+                            if (counter < 7) {
+                                $(".image_wrapper img").animate({
+                                    left: "-=" + move
+                                }, 250);
+                                counter++;
+                                $("li.selected").removeClass("selected");
+                                $("#nav" + counter).addClass("selected");
+                            } else {
+                                $(".image_wrapper img").animate({
+                                    left: "+=" + move * 6
+                                }, 250);
+                                counter = 1;
+                                $("li.selected").removeClass("selected");
+                                $("#nav" + counter).addClass("selected");
+                            }
+                        });
+
+                        // Previous button
+                        $(".prev").click(function() {
+                            if (counter > 1) {
+                                $(".image_wrapper img").animate({
+                                    left: "+=" + move
+                                }, 250);
+                                counter--;
+                                $("li.selected").removeClass("selected");
+                                $("#nav" + counter).addClass("selected");
+                            } else {
+                                $(".image_wrapper img").animate({
+                                    left: "-=" + move * 6
+                                }, 250);
+                                counter = 7;
+                                $("li.selected").removeClass("selected");
+                                $("#nav" + counter).addClass("selected");
+                            }
+                        });
+                    });
+                </script>
+            </section>
+        </div>
+    </div>
+    
+</body>
+<footer>
+    <p><a href="../part2/index.html">To Part 2</a></p>
+</footer>
+</html>

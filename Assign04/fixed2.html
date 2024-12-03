@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Assign04 - Fixed Side Bar 2, Flyout, Ad Dropdown</title>
+<script type ="text/javascript" src ="js/jquery-3.7.1.min.js"> </script>
+<style type="text/css">
+    body {background-color: #ffffff;}
+    #contactForm{
+        width: 400px;
+        height: 250px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 9pt;
+        font-weight: bold;
+        position: fixed;
+        top: 250px;
+        left: -400px;
+        background-color: hotpink;
+        /* background-color: rgba(50,50,50, .99); */
+        margin: 0px;
+        z-index: 110;
+    }
+    #contact span{
+        padding: 0px;
+        margin: 0px;
+        position: relative;
+        top: 2px;
+    }
+    #contact{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 9pt;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 17px;
+        padding-bottom: 0px;
+        padding-left: 3px;
+        padding-right: 3px;
+        position: absolute;
+        top: 350px;
+        left: -42px;
+        background-color: rgb(177,148,108);
+        background-color: rgba(177,148,108, .75);
+        width: 90px;
+        height: 25px;
+        margin: 0px;
+        z-index: 100;
+    }
+
+    #contact:hover,
+    #contact:focus{
+        background-color: rgba(177,148,108, .90);
+        position: absolute;
+        cursor: pointer;
+    }
+
+    #contact.fixed,
+    #contactForm.fixed{
+        position:fixed;
+    }
+
+    .rotate{
+        transform: rotate(-90deg);
+    }
+    #dropdown{
+        position: absolute;
+        top: -150px;
+        left: 500px;
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #000000;
+        z-index: 75;
+    }
+
+    #dropdown.fixed{
+        position: fixed;
+    }
+
+    #content1, #content2, #content3, #content4{
+        position: absolute;
+        border-radius: 15px;
+        background-color: #839484;
+        width: 600px;
+        height: 300px;
+        overflow: hidden;
+        z-index: 1;
+        
+    }
+
+    #content1{
+        top: 100px;
+        left: 25px;
+        
+    }
+    #content2{
+        top: 100px;
+        left: 660px;
+    }
+    #content3{
+        top: 425px;
+        left: 25px;
+    }
+    #content4{
+        top: 425px;
+        left: 660px;
+    }
+    #content5{
+        position: absolute;
+        border-radius: 15px;
+        background-color: #839484;
+        width: 1230px;
+        height: 300px;
+        overflow: hidden;
+        z-index: 1;
+        top: 750px;
+        left: 25px;
+        
+    }
+
+    #ball{
+            position: absolute;
+            padding-left: 280px;
+            top: 100px;
+            width: 310px;
+        }
+    
+    #closeAd{
+        font-size: 5px;
+        text-align: right;
+        color: #000000;
+    }
+
+</style>
+</head>
+<body>
+    <div id="dropdown" style="color: red";>
+        Now Free! <br/><br/>
+        This is Your Last Chance!!<br/><br/>
+        <a href="#" id="closeAd">X</a>
+        
+    </div>
+
+    <!-- contact me fixed flyout div-->
+    <div id="contact"><span>Contact Me</span></div>
+    <div id="contactForm">
+        <div id="contactClose" style="position:relative; text-align: center; width: 15px; left:375px; top:5px; 
+        border:1px solid #dddddd; padding: 1px; color: #dddddd; cursor: pointer;">
+        X
+        </div>
+
+        <div id="contactAddress" style="position: relative; width: 325px; left:45px; top:5px; 
+        padding: 1px; color: #dddddd;">
+        Junsu Yoon<br/>&nbsp;<br/>
+        yoon188@purdue.edu<br/>&nbsp;<br/>
+        Purdue University<br/>
+        West Lafayette, IN 47906
+        </div>
+    </div>
+    <!--end contact me-->
+
+    <h3>Assign04 - Fixed Side Bar 2, Flyout, Ad Dropdown</h3>
+    <p>
+        <a href="fixed.html">Fixed Part 1</a>
+        <a href="fixed2.html">Fixed Part 2</a>
+        <a href="movingAd.html">Moving Ad</a>
+        <a href="movingBall.html">Moving Ball</a>
+        <a href="bouncingBall.html">Bouncing Ball</a>
+    </p>
+    <!-- Add jQuery Here -->
+     <script type="text/javascript">
+        $(document).ready(function(){
+            $("#contact").addClass("rotate");
+
+            $(window).scroll(function(){
+                $("#contact").addClass("fixed");
+            });
+
+            
+            $("#dropdown").animate({
+                top:"+=400"
+            },2000);
+
+            $("#dropdown").addClass("fixed");
+
+            $("#closeAd").click(function(event){
+                event.preventDefault();
+                $("#dropdown").css("top", "-150px");
+            }); //end <a> click
+
+                //
+                //Contact me Sidebar
+                //
+
+                var isShowing = 1;
+                $("#contact").click(function(e){
+                    e.preventDefault();
+                    if( isShowing%2 ){
+                        //execute every time isShowing is and odd number
+                        //brings div onto the screen
+                        $("#contact").animate({
+                            left: "+=400"
+                        },700);
+                        $("#contactForm").animate({
+                            left: "+=400"
+                        },700);
+
+                        $("#contact").addClass("fixed");
+                        $("contactForm").addClass("fixed")
+                        $("contact").css("background-color","rgba(177,148,108,.95)")
+                        isShowing++;
+                    }
+                    else {
+                        //execute every time isShowing is an even umber
+                        //move it off the screen
+                        $("#contact").animate({
+                            left: "-=400"
+                        },700);
+                        $("#contactForm").animate({
+                            left: "-=400"
+                        },700);
+
+                        $("contact").css("background-color","rgba(177,148,108,.75)")
+                        isShowing++;
+                    }
+                }); // end contact click
+
+                //When X is clicked
+                $("#contactClose").click(function(e){
+                    e.prevenDefault();
+
+                    $("#contact").animate({
+                            left: "-=400"
+                        },700);
+                        $("#contactForm").animate({
+                            left: "-=400"
+                        },700);
+
+                        $("contact").css("background-color","rgba(177,148,108,.75)")
+                        isShowing++;
+                });
+
+        }); //end document ready
+     </script>
+
+    <div id="content1">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p> 
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>  
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> 
+    </div>
+
+    <div id="content2">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p> 
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>  
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> 
+    </div>
+
+    <div id="content3">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p> 
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>  
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> 
+    </div>
+
+    <div id="content4">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p> 
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>  
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> 
+    </div>
+
+    <div id="content5">
+        <img id = "ball" src="ball.svg" width="200" height="200" />
+    </div>
+
+
+</body>
+</html>
